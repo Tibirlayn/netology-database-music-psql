@@ -38,11 +38,19 @@ CREATE TABLE IF NOT EXISTS "collection"
 (
     collection_id SERIAL PRIMARY KEY,
     "name" VARCHAR NOT NULL,
-    year_manufacture INTEGER NOT NULL CHECK (year_manufacture > 1990),
+    year_manufacture INTEGER NOT NULL CHECK (year_manufacture > 1990),  
+);
+
+CREATE TABLE IF NOT EXISTS track_collection
+(
     tracks_id INTEGER,
+    collection_id INTEGER,
     CONSTRAINT fk_tracks_id
         FOREIGN KEY (tracks_id)
-        REFERENCES tracks(tracks_id)    
+        REFERENCES tracks(tracks_id),
+    CONSTRAINT fk_collection_id
+        FOREIGN KEY (collection_id)
+        REFERENCES "collection"(collection_id)
 );
 
 CREATE TABLE IF NOT EXISTS genres
